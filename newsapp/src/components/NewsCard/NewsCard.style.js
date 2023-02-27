@@ -18,6 +18,10 @@ export default StyleSheet.create({
   description: {
     marginTop: 3,
   },
+  author: {
+    fontStyle: 'italic',
+    textAlign: 'right',
+  },
   inner_container: {
     padding: 5,
   },

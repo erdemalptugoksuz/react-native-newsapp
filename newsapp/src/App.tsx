@@ -1,17 +1,38 @@
 import React from 'react';
-import {SafeAreaView, View, FlatList, StyleSheet} from 'react-native';
-import news_data from './news_data.json';
+import {
+  SafeAreaView,
+  Text,
+  FlatList,
+  StyleSheet,
+  ScrollView,
+  Image,
+  Dimensions,
+} from 'react-native';
 import NewsCard from './components/NewsCard';
+import news_data from './news_data.json';
+import news_banner_data from './news_banner_data.json';
 
 const App = () => {
+  const renderNews = ({item}) => <NewsCard news={item} />;
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <FlatList
-          data={news_data}
-          renderItem={({item}) => <NewsCard news={item} />}
-        />
-      </View>
+      <Text style={styles.headerText}>News</Text>
+      <FlatList
+        // eslint-disable-next-line react/no-unstable-nested-components
+        ListHeaderComponent={() => (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {news_banner_data.map(bannerNews => (
+              <Image
+                style={styles.banner_image}
+                source={{uri: bannerNews.imageUrl}}
+              />
+            ))}
+          </ScrollView>
+        )}
+        keyExtractor={item => item.u_id.toString()}
+        data={news_data}
+        renderItem={renderNews}
+      />
     </SafeAreaView>
   );
 };
@@ -20,6 +41,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#eceff1',
+  },
+  banner_image: {
+    height: Dimensions.get('window').height / 5,
+    width: Dimensions.get('window').width / 2,
+  },
+  headerText: {
+    fontWeight: 'bold',
+    fontSize: 50,
   },
 });
 
