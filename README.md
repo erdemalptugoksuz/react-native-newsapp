@@ -1,2 +1,2 @@
-# React Ntive News App
-News app on React Native
+# React Native News App
+This is my first react native app.
