@@ -1,2 +1,2 @@
-# react-native-news-app
+# React Ntive News App
 News app on React Native
